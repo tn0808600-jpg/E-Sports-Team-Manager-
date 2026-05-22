@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Player</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: #1e293b; padding: 40px; border-radius: 20px; width: 400px; border: 1px solid #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: #38bdf8; margin-bottom: 25px; }
+        label { display: block; margin: 10px 0 5px; color: #94a3b8; }
+        input, select { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
+        button { width: 100%; padding: 15px; margin-top: 25px; background: linear-gradient(90deg, #38bdf8, #8b5cf6); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+        .back { display: block; text-align: center; margin-top: 15px; color: #64748b; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Add New Player</h2>
+        <form method="POST">
+            <label>In-Game Name</label>
+            <input type="text" name="ingame_name" required>
+
+            <label>Role</label>
+            <select name="role" required>
+                <option value="Carry">Carry</option>
+                <option value="Support">Support</option>
+                <option value="Mid">Mid</option>
+                <option value="Offlane">Offlane</option>
+                <option value="Coach">Coach</option>
+            </select>
+
+            <label>Team</label>
+            <select name="team_id">
+                <option value="">No Team</option>
+                {% for team in teams %}
+                <option value="{{ team['Team_ID'] }}">{{ team['Team_Name'] }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">REGISTER</button>
+        </form>
+        <a href="/" class="back">← Cancel</a>
+    </div>
+</body>
+</html>

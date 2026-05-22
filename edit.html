@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Player</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: #1e293b; padding: 40px; border-radius: 20px; width: 400px; border: 1px solid #8b5cf6; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: #8b5cf6; margin-bottom: 25px; }
+        label { display: block; margin: 10px 0 5px; color: #94a3b8; }
+        input, select { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
+        button { width: 100%; padding: 15px; margin-top: 25px; background: #8b5cf6; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+        .back { display: block; text-align: center; margin-top: 15px; color: #64748b; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            <label>In-Game Name</label>
+            <input type="text" name="ingame_name" value="{{ player['In_Game_Name'] }}" required>
+
+            <label>Role</label>
+            <select name="role" required>
+                <option value="Carry" {% if player['Role'] == 'Carry' %}selected{% endif %}>Carry</option>
+                <option value="Support" {% if player['Role'] == 'Support' %}selected{% endif %}>Support</option>
+                <option value="Mid" {% if player['Role'] == 'Mid' %}selected{% endif %}>Mid</option>
+                <option value="Offlane" {% if player['Role'] == 'Offlane' %}selected{% endif %}>Offlane</option>
+                <option value="Coach" {% if player['Role'] == 'Coach' %}selected{% endif %}>Coach</option>
+            </select>
+
+            <label>Team</label>
+            <select name="team_id">
+                <option value="">No Team</option>
+                {% for team in teams %}
+                <option value="{{ team['Team_ID'] }}" {% if team['Team_ID'] == player['Team_ID'] %}selected{% endif %}>
+                    {{ team['Team_Name'] }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">UPDATE CHANGES</button>
+        </form>
+        <a href="/" class="back">← Cancel</a>
+    </div>
+</body>
+</html>
